@@ -1,0 +1,66 @@
+-- Passo 1: Criar o banco de dados
+DROP DATABASE IF EXISTS Escola;
+CREATE DATABASE Escola;
+USE Escola;
+
+-- Passo 2: Criar a tabela de Alunos
+CREATE TABLE Alunos (
+    ID_ALUNO INT AUTO_INCREMENT PRIMARY KEY,
+    Nome VARCHAR(100) NOT NULL,
+    data_nascimento DATE,
+    endereco VARCHAR(150)
+);
+
+-- Passo 3: Criar a tabela de Cursos
+CREATE TABLE Cursos (
+    id_Curso INT AUTO_INCREMENT PRIMARY KEY,
+    nome_Curso VARCHAR(255) NOT NULL,
+    descricao TEXT
+);
+
+-- Passo 4: Criar a tabela de Notas
+CREATE TABLE Notas (
+    id_nota INT PRIMARY KEY AUTO_INCREMENT,
+    id_aluno INT,
+    id_curso INT,
+    nota DECIMAL(3, 1),
+    FOREIGN KEY (id_aluno) REFERENCES Alunos(ID_ALUNO),
+    FOREIGN KEY (id_curso) REFERENCES Cursos(id_Curso)
+);  
+
+-- Passo 5: Inserir dados na tabela Alunos
+INSERT INTO Alunos (Nome, data_nascimento, endereco) VALUES
+('João Silva', '2003-05-20', 'SC'),
+('Maria Souza', '2004-08-15', 'SP'),
+('Pedro Lima', '2005-03-10', 'PR');
+
+-- Passo 6: Inserir dados na tabela Cursos
+INSERT INTO Cursos (nome_Curso, descricao) VALUES
+('Matemática', 'Curso de matemática básica'),
+('Português', 'Curso de língua portuguesa'),
+('Ciências', 'Ciências naturais');
+
+-- Passo 7: Inserir dados na tabela Notas
+INSERT INTO Notas (id_aluno, id_curso, nota) VALUES 
+(1, 1, 8.5),
+(1, 2, 7.0),
+(2, 1, 9.0),
+(2, 3, 8.0),
+(3, 1, 6.5);
+
+-- Consultar notas
+SELECT A.Nome AS Nome_Aluno, C.nome_Curso AS Nome_Curso, N.nota AS Nota
+FROM Notas N
+JOIN Alunos A ON N.id_aluno = A.ID_ALUNO
+JOIN Cursos C ON N.id_curso = C.id_Curso
+LIMIT 0, 1000;
+
+-- Atualizar uma nota
+UPDATE Notas SET nota = 9.5 WHERE id_aluno = 1 AND id_curso = 1;
+
+-- Excluir uma nota e um aluno
+DELETE FROM Notas WHERE id_aluno = 3;
+DELETE FROM Alunos WHERE ID_ALUNO = 3;
+
+-- Excluir um curso (se necessário, mas cuidado: pode haver dependências)
+DELETE FROM Cursos WHERE id_Curso = (SELECT id_Curso FROM Notas WHERE id_aluno = 3);
