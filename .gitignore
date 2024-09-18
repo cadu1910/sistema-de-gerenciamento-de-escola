@@ -1,0 +1,11 @@
+# Arquivos relacionados ao MySQL
+*.sql
+*.log
+
+# Diretórios de sistema
+.DS_Store
+Thumbs.db
+
+# Arquivos do ambiente
+.env
+*.env
