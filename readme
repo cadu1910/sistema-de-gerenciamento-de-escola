@@ -1,0 +1,59 @@
+# Projeto Escola - Sistema de Gerenciamento de Alunos, Cursos e Notas
+
+## Descrição
+Este projeto tem como objetivo criar um sistema básico de gerenciamento de alunos, cursos e notas em uma instituição de ensino. Utilizando MySQL como banco de dados, foram criadas tabelas para armazenar dados de alunos, cursos e suas respectivas notas. As operações básicas incluem inserção, atualização, consulta e exclusão de registros.
+
+## Estrutura do Banco de Dados
+
+1. **Alunos**: Armazena os dados dos alunos.
+   - ID_ALUNO (INT, chave primária, auto incremento)
+   - Nome (VARCHAR, não nulo)
+   - Data de Nascimento (DATE)
+   - Endereço (VARCHAR)
+
+2. **Cursos**: Armazena os dados dos cursos.
+   - ID_Curso (INT, chave primária, auto incremento)
+   - Nome do Curso (VARCHAR, não nulo)
+   - Descrição (TEXT)
+
+3. **Notas**: Armazena as notas dos alunos por curso.
+   - ID_Nota (INT, chave primária, auto incremento)
+   - ID_Aluno (INT, chave estrangeira que referencia Alunos)
+   - ID_Curso (INT, chave estrangeira que referencia Cursos)
+   - Nota (DECIMAL)
+
+## Funcionalidades
+
+- Inserir novos alunos, cursos e notas.
+- Atualizar notas dos alunos.
+- Consultar as notas de alunos em cursos específicos.
+- Excluir alunos e suas notas associadas.
+- Excluir cursos (com atenção às dependências de notas).
+
+## Requisitos
+
+- MySQL 5.7 ou superior
+- Um ambiente configurado para executar consultas SQL.
+
+## Passos para instalação
+
+1. Clone o repositório:
+
+    ```bash
+    git clone https://github.com/seu-usuario/projeto-escola.git
+    ```
+
+2. Crie o banco de dados e as tabelas executando o script SQL fornecido no arquivo `setup.sql`.
+
+3. Insira os dados utilizando os exemplos disponíveis ou crie seus próprios dados conforme necessário.
+
+4. Execute as consultas de exemplo e manipule os dados conforme desejado.
+
+## Como usar
+
+- Execute o script SQL `setup.sql` no seu ambiente MySQL para criar o banco de dados e as tabelas.
+- Use as consultas SQL para adicionar, modificar, ou remover dados conforme necessário.
+
+## Licença
+
+Este projeto é licenciado sob os termos da licença MIT. Consulte o arquivo `LICENSE` para mais detalhes.
